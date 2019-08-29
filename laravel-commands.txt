@@ -1,0 +1,26 @@
+/*
+CMD
+ */
+//To Generate Controller with resources like index, store, destroty
+php artisan make:controller CategoriesController --resource
+
+// to get all route list
+php artisan route:list
+
+
+
+
+/*
+Route functionalities
+ */
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::resource('categories', 'CategoriesController');
+
+
+/*
+Db command
+ */
+php artisan migrate // for migrating database
