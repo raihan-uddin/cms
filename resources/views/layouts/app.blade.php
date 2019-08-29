@@ -73,13 +73,15 @@
     </nav>
 
     <main class="py-4">
-        @if(session()->has('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success')}}
-            </div>
-        @endif
         @auth
         <div class="container">
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ session()->get('success')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-4">
                     <ul class="list-group">
@@ -87,7 +89,7 @@
                             <a href="">Post</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/categories">Categories</a>
+                            <a href="{{route('categories.index')}}">Categories</a>
                         </li>
                     </ul>
                 </div>
