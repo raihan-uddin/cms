@@ -31,7 +31,11 @@
 							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
 						</td>
 						<td>
-							<button type="button" class="btn btn-sm btn-danger" onclick="handleDelete({{ $post->id }})">Trash</button>
+							<form action="{{ route('posts.destroy', $post->id) }}" method="POST" >
+								@csrf
+								@method('DELETE');
+							<button type="submit" class="btn btn-sm btn-danger">Trash</button>	
+							</form>
 						</td>
 					</tr>
 					@endforeach
