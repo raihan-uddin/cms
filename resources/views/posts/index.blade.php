@@ -16,17 +16,22 @@
 						<th>Image</th>
 						<th>Title</th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($posts as $key => $post)
 					<tr>
 						<td>{{ ++$key }}</td>
-						<td><img src="{{ $post->image }}" alt="Not Found!"></td>
+						<td>
+							<img class="img img-thumbnail" src="{{ asset(('storage/' . $post->image)) }}" alt="Not Found!" height="100" width="100">
+						</td>
 						<td>{{ $post->title }}</td>
 						<td>
 							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
-							<button type="button" class="btn btn-sm btn-danger" onclick="handleDelete({{ $post->id }})">Delete</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-sm btn-danger" onclick="handleDelete({{ $post->id }})">Trash</button>
 						</td>
 					</tr>
 					@endforeach
