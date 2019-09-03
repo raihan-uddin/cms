@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Posts\CreatePostsRequest;
+use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Post;
 
 class PostsController extends Controller
@@ -48,6 +49,7 @@ class PostsController extends Controller
             'description' => $request->description,
             'content' => $request->content,
             'image' => $image,
+            'published_at' => $request->published_at,
         ]);
 
         session()->flash('success', 'Post created successfully.');
@@ -72,9 +74,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.create')->with('post', $post);
     }
 
     /**
@@ -84,9 +86,27 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->only(['title', 'description', 'published_at', 'content']);
+        // check if new image
+        if($request->hasFile('image')){
+            // upload it
+            $image = $request->image->store('posts');
+            // delete old one
+            Storage::delete($post->image);
+
+            $data['image'] = $image;
+        }
+
+        // update attributes
+        $post->update($data);
+
+        // flash message
+        session()->flash('success', 'Post update successfully');
+        
+        // redirect user
+        return redirect(route('posts.index'));
     }
 
     /**
