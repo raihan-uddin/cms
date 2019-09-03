@@ -8,7 +8,8 @@
 	<div class="card-header">
 		Posts
 		<div class="card-body">
-			<table class="table table-striped  table-hover table-bordered">
+			@if($posts->count() > 0)
+			<table class="table table-striped  table-hover ">
 				<caption>Posts Table</caption>
 				<thead>
 					<tr>
@@ -27,14 +28,16 @@
 							<img class="img img-thumbnail" src="{{ asset(('storage/' . $post->image)) }}" alt="Not Found!" height="100" width="100">
 						</td>
 						<td>{{ $post->title }}</td>
-						<td>
-							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
+						<td>	
+							@if(!$post->trashed())
+							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>	
+							@endif
 						</td>
 						<td>
 							<form action="{{ route('posts.destroy', $post->id) }}" method="POST" >
 								@csrf
 								@method('DELETE')
-							<button type="submit" class="btn btn-sm btn-danger">Trash</button>	
+							<button type="submit" class="btn btn-sm btn-danger">{{ $post->trashed() ? 'Delete' : 'Trash'}}</button>	
 							</form>
 						</td>
 					</tr>
@@ -42,6 +45,9 @@
 				</tbody>
 			</table>
 		</div>
+		@else
+		<h3 class="text-center">No post yet!</h3>
+		@endif
 	</div>
 </div>
 @endsection

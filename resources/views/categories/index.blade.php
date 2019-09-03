@@ -8,6 +8,8 @@
 	<div class="card-header">
 		Categories
 		<div class="card-body">
+			@if($categories->count() > 0)
+
 			<table class="table table-striped  table-hover table-bordered">
 				<caption>Categories Table</caption>
 				<thead>
@@ -54,6 +56,9 @@
 					</form>
 				</div>
 			</div>
+		@else
+		<h3 class="text-center">No categories yet!</h3>
+		@endif
 		</div>
 	</div>
 </div>
