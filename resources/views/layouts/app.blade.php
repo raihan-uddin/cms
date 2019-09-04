@@ -75,41 +75,48 @@
         @auth
         <div class="container">
             @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show">
+                <div class="alert alert-success alert-dismissible fade show">
                 {{ session()->get('success')}}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </div>
-                @endif
-                <div class="row">
-                    <div class="col-md-4">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <a href="{{route('posts.index')}}">Post</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{route('categories.index')}}">Categories</a>
-                            </li>
-                        </ul>
-                        <ul class="list-group mt-5">
-                            <li class="list-group-item">
-                                <a href="{{route('trashed-posts.index')}}">Trshed Post</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-8">
-                        @yield('content')
-                    </div>
+            @endif
+            @if(session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show">
+                {{ session()->get('error')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </div>
-                @else
-                @yield('content')
-                @endauth
+            @endif
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="{{route('posts.index')}}">Post</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{{route('categories.index')}}">Categories</a>
+                        </li>
+                    </ul>
+                    <ul class="list-group mt-5">
+                        <li class="list-group-item">
+                            <a href="{{route('trashed-posts.index')}}">Trshed Post</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    @yield('content')
+                </div>
             </div>
-        </main>
-    </div>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    @yield('scripts')
+            @else
+            @yield('content')
+            @endauth
+        </div>
+    </main>
+</div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+@yield('scripts')
 
 </body>
 </html>
