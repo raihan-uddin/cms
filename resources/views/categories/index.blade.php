@@ -10,13 +10,13 @@
 		<div class="card-body">
 			@if($categories->count() > 0)
 
-			<table class="table table-striped  table-hover table-bordered">
+			<table class="table table-striped  table-hover">
 				<caption>Categories Table</caption>
 				<thead>
 					<tr>
 						<th>Sl</th>
 						<th>Name</th>
-						<th>Edit</th>
+						<th>Posts Count</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,6 +24,7 @@
 					<tr>
 						<td>{{ ++$key }}</td>
 						<td>{{ $category->name }}</td>
+						<td>{{ $category->posts->count() }}</td>
 						<td>
 							<a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">Edit</a>
 							<button type="button" class="btn btn-sm btn-danger" onclick="handleDelete({{ $category->id }})">Delete</button>

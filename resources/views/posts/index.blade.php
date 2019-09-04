@@ -15,8 +15,8 @@
 					<tr>
 						<th>Sl</th>
 						<th>Image</th>
+						<th>Category</th>
 						<th>Title</th>
-						<th></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -28,6 +28,7 @@
 						<td>
 							<img class="img img-thumbnail" src="{{ asset(('storage/' . $post->image)) }}" alt="Not Found!" height="100" width="100">
 						</td>
+						<td><a href="{{ route('categories.edit',  $post->category->id) }}" >{{ $post->category->name }}</a></td>
 						<td>{{ $post->title }}</td>
 						@if($post->trashed())
 						<td>
