@@ -18,6 +18,7 @@
 						<th>Title</th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,11 +29,19 @@
 							<img class="img img-thumbnail" src="{{ asset(('storage/' . $post->image)) }}" alt="Not Found!" height="100" width="100">
 						</td>
 						<td>{{ $post->title }}</td>
-						<td>	
-							@if(!$post->trashed())
-							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>	
-							@endif
+						@if($post->trashed())
+						<td>
+							<form action="{{ route('restore-post', $post->id) }}" method="post" >
+								@csrf
+								@method('PUT')
+								<button type="submit" class="btn btn-info btn-sm">Restore</button>
+							</form>
 						</td>
+						@else
+						<td>	
+							<a href="{{ route('posts.edit', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
+						</td>
+						@endif
 						<td>
 							<form action="{{ route('posts.destroy', $post->id) }}" method="POST" >
 								@csrf
