@@ -11,6 +11,7 @@
 				<thead>
 					<tr>
 						<th>Sl</th>
+						<th>Image</th>
 						<th>Name</th>
 						<th>Email</th>
 						<th></th>
@@ -21,11 +22,17 @@
 					@foreach($users as $key => $user)
 					<tr>
 						<td>{{ ++$key }}</td>
-						<td>{{ $user->name}}</td>
-						<td>{{ $user->email}}</td>
+						<td>
+							<img width="40px" height="40px" style="border-radius: 50%;" src="{{ Gravatar::src($user->email) }}" alt="">							
+						</td>
+						<td>{{ $user->name }}</td>
+						<td>{{ $user->email }}</td>
 						<td>
 							@if(!$user->isAdmin())
-							<button class="btn btn-sm btn-success">Make admin</button>
+							<form action="{{ route('users.make-admin', $user->id )}}" method="post">
+								@csrf
+							<button class="btn btn-sm btn-success" type="submit">Make admin</button>
+							</form>
 							@endif
 						</td>
 					</tr>
