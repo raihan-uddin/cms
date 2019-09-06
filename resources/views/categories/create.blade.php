@@ -6,7 +6,7 @@
 		{{ isset($category) ? 'Edit Category': 'Create Category'}}
 	</div>
 	<div class="card-body">
-		@include('partials.error')
+		@include('partials.errors')
 		<form action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}" method="post">
 			@csrf
 			@if(isset($category))
