@@ -10,7 +10,7 @@ class Post extends Model
 {
 	use SoftDeletes;
     
-    protected $fillable = ['title', 'description', 'content', 'image', 'published_at', 'category_id'];
+    protected $fillable = ['title', 'description', 'content', 'image', 'published_at', 'category_id', 'user_id'];
 
     /*
     *	Delete post image from storage
@@ -40,4 +40,8 @@ class Post extends Model
     {
        return in_array($tagId, $this->tags->pluck('id')->toArray());
     } 
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

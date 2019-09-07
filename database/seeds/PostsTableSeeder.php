@@ -3,8 +3,10 @@
 Use App\Category;
 Use App\Post;
 Use App\Tag;
+Use App\User;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class PostsTableSeeder extends Seeder
 {
@@ -15,6 +17,20 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
+    	$author1 = User::create([
+			'name' => 'John Doe',
+			'email' => 'john@doe.com',
+			'password' => Hash::make('password')
+    	]);
+
+
+    	$author2 = User::create([
+			'name' => 'Jahn Doe',
+			'email' => 'jahn@doe.com',
+			'password' => Hash::make('password')
+    	]);
+
+
     	$category1 = Category::create([
 			'name' => 'News'
     	]);
@@ -31,6 +47,8 @@ class PostsTableSeeder extends Seeder
 			'name' => 'Product'
     	]);
 
+
+
         
 
         $post1 = Post::create([
@@ -40,10 +58,11 @@ class PostsTableSeeder extends Seeder
 
         	'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         	'category_id' => $category1->id,
+        	'user_id' => $author1->id,
         	'image' => 'posts/1.jpg',
         ]);
 
-        $post2 = Post::create([
+        $post2 = $author2->posts()->create([
         	'title' => "Top 5 brilliant content marketing strategies",
 
         	'description' => "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with",
@@ -55,7 +74,7 @@ The passage experienced a surge in popularity during the 1960s when Letraset use
         	'image' => 'posts/2.jpg',
         ]);
 
-        $post3 = Post::create([
+        $post3 = $author2->posts()->create([
         	'title' => "Best practices for minimalist design with example",
 
         	'description' => "Lorem ipsum began as scrambled, nonsensical Latin derived from Cicero's 1st-century BC text De Finibus Bonorum et Malorum.",
@@ -65,13 +84,14 @@ The passage experienced a surge in popularity during the 1960s when Letraset use
         	'image' => 'posts/3.jpg',
         ]);
 
-        $post4 = Post::create([
+        $post4 = $author2->posts()->create([
         	'title' => "Best practices for minimalist design with exampleCongratulate and thank to Maryam for joining our team",
 
         	'description' => "Lorem ipsum began as scrambled, nonsensical Latin derived from Cicero's 1st-century BC text De Finibus Bonorum et Malorum.",
 
         	'content' => "Creation timelines for the standard lorem ipsum passage vary, with some citing the 15th century and others the 20th.",
         	'category_id' => $category2->id,
+        	'user_id' => $author1->id,
         	'image' => 'posts/4.jpg',
         ]);
 
