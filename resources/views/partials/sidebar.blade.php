@@ -18,7 +18,7 @@
       @endforeach
     </div>
 
-    <hr>
+    {{-- <hr>
 
     <h6 class="sidebar-title">Top posts</h6>
 
@@ -27,7 +27,7 @@
       <img class="rounded w-65px mr-4" src="{{asset('storage/' . $post->image)}}">
       <p class="media-body small-2 lh-4 mb-0">{{ $post->title }}</p>
     </a>
-    @endforeach
+    @endforeach --}}
 
 
     <hr>
@@ -35,7 +35,7 @@
     <h6 class="sidebar-title">Tags</h6>
     <div class="gap-multiline-items-1">
       @foreach($tags as $tag)
-      <a class="badge badge-secondary" href="#">{{ $tag->name }}</a>
+      <a class="badge badge-secondary" href="{{ route('blog.tag', $tag->id) }}">{{ $tag->name }}</a>
       @endforeach
     </div>
 
